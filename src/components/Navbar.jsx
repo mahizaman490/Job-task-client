@@ -10,9 +10,9 @@ const Navbar = () => {
           <div className="text-white font-bold text-lg">Task Manager</div>
           <div className="flex space-x-4">
             <Link to='/' className="text-white">Home</Link>
-            <Link to='/' className="text-white">Tasks</Link>
-            <Link to='/' className="text-white">About</Link>
-            <Link to='/' className="text-white">Dashboard</Link>
+            <Link to='/login' className="text-white">Login</Link>
+            <Link to='/' className="text-white">Logout</Link>
+            <Link to='/dashboard' className="text-white">Dashboard</Link>
           </div>
         </div>
       </div>
