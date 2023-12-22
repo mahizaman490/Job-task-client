@@ -3,7 +3,7 @@ import { useForm, Controller } from "react-hook-form";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.css";
 
-const CreateNewTask = () => {
+const UpdateTask = () => {
   const { handleSubmit, control } = useForm();
 
   const onSubmit = async (data) => {
@@ -30,7 +30,7 @@ const CreateNewTask = () => {
 
   return (
     <div className="bg-gradient-to-r from-blue-300 to-blue-500 p-4 md:p-8 max-w-2xl mx-auto rounded-lg shadow-lg">
-      <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">Create New Task</h2>
+      <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">Update Task</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
         <div className="form-control">
           <label htmlFor="name" className="label text-white">
@@ -84,11 +84,11 @@ const CreateNewTask = () => {
           type="submit"
           className="btn mt-4 text-white btn-block bg-gradient-to-r from-blue-400 to-blue-500 hover:from-blue-500 hover:to-blue-600"
         >
-          Create New Task
+          Update
         </button>
       </form>
     </div>
   );
 };
 
-export default CreateNewTask;
+export default UpdateTask;

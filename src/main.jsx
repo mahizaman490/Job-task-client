@@ -21,6 +21,7 @@ import Myprofile from './components/Myprofile';
 import PrivateRoutes from './PrivateRoutes';
 import Dashboard from './components/Dashboard';
 import AllTask from './components/AllTask';
+import UpdateTask from './components/UpdateTask';
 
 const router = createBrowserRouter([
   {
@@ -56,6 +57,11 @@ const router = createBrowserRouter([
       {
         path:'addtask',
         element:<AllTask></AllTask>,
+       
+      },
+      {
+        path:'updatetask',
+        element:<UpdateTask></UpdateTask>,
        
       },
      
