@@ -21,6 +21,8 @@ import Myprofile from './components/Myprofile';
 import PrivateRoutes from './PrivateRoutes';
 import Dashboard from './components/Dashboard';
 import AllTask from './components/AllTask';
+
+import Todo from './components/Todo';
 import UpdateTask from './components/UpdateTask';
 
 const router = createBrowserRouter([
@@ -51,23 +53,31 @@ const router = createBrowserRouter([
     element: <PrivateRoutes><Dashboard></Dashboard></PrivateRoutes>,
     children:[
       {
-        path:'alltask',
-        element:<CreateNewTask></CreateNewTask> 
-      },
-      {
         path:'addtask',
+        element:<CreateNewTask></CreateNewTask> ,
+        
+      }, 
+      {
+        path:'alltask',
         element:<AllTask></AllTask>,
+        loader: () => fetch("https://job-task-server-lemon.vercel.app/task")
        
       },
       {
-        path:'updatetask',
+        path:'updatetask/:id',
         element:<UpdateTask></UpdateTask>,
+        loader: ({params}) => fetch(`https://job-task-server-lemon.vercel.app/task/${params.id}`)
        
       },
      
       {
         path:'myProfile',
         element:<Myprofile></Myprofile>,
+       
+      },
+      {
+        path:'todo',
+        element:<Todo></Todo>,
        
       }
     ]

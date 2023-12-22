@@ -52,10 +52,13 @@ const TargetAudience = () => {
   ];
 
   return (
-    <section className="bg-gray-200 py-12">
+  <>
+  
+  <h2 className="text-xl mb-8 my-16 md:text-6xl text-center font-semibold bg-gradient-to-r from-blue-600 via-blue-400 to-blue-300  text-transparent   bg-clip-text">Who Can Benefited ! </h2>
+    <section className="bg-gray-200 py-12 my-16">
+      
       <div className="container mx-auto text-center">
-        <h2 className="text-3xl font-bold mb-6">Who Can Benefit?</h2>
-
+ 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
           {/* Target Audience Cards */}
           {targetAudiences.map((audience) => (
@@ -68,6 +71,9 @@ const TargetAudience = () => {
         </div>
       </div>
     </section>
+  
+  
+  </>
   );
 };
 

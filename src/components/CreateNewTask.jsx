@@ -1,27 +1,46 @@
-
-import { useForm, Controller } from "react-hook-form";
+import { useState } from "react";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.css";
 
 const CreateNewTask = () => {
-  const { handleSubmit, control } = useForm();
+  const [formData, setFormData] = useState({
+    name: "",
+    type: "",
+    price: "",
+    description: "",
+  });
 
-  const onSubmit = async (data) => {
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleAddProduct = async (event) => {
+    event.preventDefault();
+
     try {
-      const response = await fetch("https://technology-and-electronics-server-gamma.vercel.app/product", {
+      const response = await fetch("https://job-task-server-lemon.vercel.app/task", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "content-type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(formData),
       });
 
-      const result = await response.json();
+      const data = await response.json();
 
-      console.log(result);
-
-      if (result.insertedId) {
+      if (data.insertedId) {
         Swal.fire("A new task has been added!");
+        // Optionally, you can reset the form after successful submission
+        setFormData({
+          name: "",
+          type: "",
+          price: "",
+          description: "",
+        });
       }
     } catch (error) {
       console.error("Error adding task:", error);
@@ -31,16 +50,19 @@ const CreateNewTask = () => {
   return (
     <div className="bg-gradient-to-r from-blue-300 to-blue-500 p-4 md:p-8 max-w-2xl mx-auto rounded-lg shadow-lg">
       <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">Create New Task</h2>
-      <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
+      <form onSubmit={handleAddProduct} className="grid gap-4">
         <div className="form-control">
           <label htmlFor="name" className="label text-white">
             Title
           </label>
-          <Controller
+          <input
+            type="text"
             name="name"
-            control={control}
-            defaultValue=""
-            render={({ field }) => <input {...field} type="text" placeholder="Title" className="input input-bordered w-full" />}
+            id="name"
+            placeholder="Title"
+            className="input input-bordered w-full"
+            value={formData.name}
+            onChange={handleChange}
           />
         </div>
 
@@ -48,11 +70,14 @@ const CreateNewTask = () => {
           <label htmlFor="type" className="label text-white">
             Priority
           </label>
-          <Controller
+          <input
+            type="text"
             name="type"
-            control={control}
-            defaultValue=""
-            render={({ field }) => <input {...field} type="text" placeholder="Priority" className="input input-bordered w-full" />}
+            id="type"
+            placeholder="Priority"
+            className="input input-bordered w-full"
+            value={formData.type}
+            onChange={handleChange}
           />
         </div>
 
@@ -60,11 +85,14 @@ const CreateNewTask = () => {
           <label htmlFor="price" className="label text-white">
             Deadline
           </label>
-          <Controller
+          <input
+            type="text"
             name="price"
-            control={control}
-            defaultValue=""
-            render={({ field }) => <input {...field} type="text" placeholder="Deadline" className="input input-bordered w-full" />}
+            id="price"
+            placeholder="Deadline"
+            className="input input-bordered w-full"
+            value={formData.price}
+            onChange={handleChange}
           />
         </div>
 
@@ -72,11 +100,14 @@ const CreateNewTask = () => {
           <label htmlFor="description" className="label text-white">
             Description
           </label>
-          <Controller
+          <input
+            type="text"
             name="description"
-            control={control}
-            defaultValue=""
-            render={({ field }) => <input {...field} type="text" placeholder="Description" className="input input-bordered w-full" />}
+            id="description"
+            placeholder="Description"
+            className="input input-bordered w-full"
+            value={formData.description}
+            onChange={handleChange}
           />
         </div>
 
