@@ -1,8 +1,9 @@
 import  { useContext, useState } from 'react';
 import { Link, Link as RouterLink, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../providers/AuthProvider';
+
 import Swal from 'sweetalert2';
 import { Button, Card, CardContent, TextField, Typography } from '@mui/material';
+import { AuthContext } from './providers/AuthProvider';
 
 
 

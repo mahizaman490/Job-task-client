@@ -1,44 +1,42 @@
-// import React, { useContext, useState } from 'react';
-import { Link, Link as RouterLink } from 'react-router-dom';
-// import { AuthContext } from '../providers/AuthProvider';
-import { Button, Card, CardContent, TextField, Typography } from '@mui/material';
+import  { useContext, useState } from 'react';
+import { Link, Link as RouterLink, useNavigate } from 'react-router-dom';
 
+import { Button, Card, CardContent, TextField, Typography } from '@mui/material';
+import { AuthContext } from '../providers/AuthProvider';
 
 const Register = () => {
-//   const { createUser } = useContext(AuthContext);
-//   const [registerError, setRegisterError] = useState('');
-//   const [registerSuccess, setRegisterSuccess] = useState('');
+  const { createUser } = useContext(AuthContext);
+  const [registerError, setRegisterError] = useState('');
+  const [registerSuccess, setRegisterSuccess] = useState('');
+  const navigate = useNavigate(); 
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     const name = e.target.name.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    // setRegisterError('');
-    // setRegisterSuccess('');
+    setRegisterError('');
+    setRegisterSuccess('');
 
-    // if (password.length < 6) {
-    //   setRegisterError('Password should be at least 6 characters or longer');
-    //   return;
-    // } else if (!/[A-Z]/.test(password)) {
-    //   setRegisterError('Your password should have at least one uppercase character');
-    //   return;
-    // } else if (!/[!@#$%^&*()_+{}\\[\]:;<>,.?~\\]/.test(password)) {
-    //   setRegisterError('Your password should have a special character');
-    //   return;
-    // }
+    try {
+      if (password.length < 6) {
+        throw new Error('Password should be at least 6 characters or longer');
+      } else if (!/[A-Z]/.test(password)) {
+        throw new Error('Your password should have at least one uppercase character');
+      } else if (!/[!@#$%^&*()_+{}\\[\]:;<>,.?~\\]/.test(password)) {
+        throw new Error('Your password should have a special character');
+      }
 
-    // createUser(email, password)
-    //   .then((result) => {
-    //     console.log(result.user);
-    //     setRegisterSuccess('Your registration was successful!');
-    //     e.target.reset();
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //     setRegisterError(error.message);
-    //   });
+      const result = await createUser(email, password);
+      console.log(result.user);
+      setRegisterSuccess('Your registration was successful!');
+      e.target.reset();
+      navigate('/'); 
+    } catch (error) {
+      console.error(error);
+      setRegisterError(error.message);
+    }
   };
 
   return (
@@ -80,9 +78,6 @@ const Register = () => {
                 required
                 margin="normal"
               />
-              <Link component={RouterLink} to="#" variant="body2" color="primary">
-                Forgot password?
-              </Link>
               <Button type="submit" fullWidth variant="contained" color="primary">
                 Register
               </Button>
@@ -95,8 +90,8 @@ const Register = () => {
             </Typography>
           </CardContent>
         </Card>
-        {/* {registerError && <Typography color="error">{registerError}</Typography>}
-        {registerSuccess && <Typography>{registerSuccess}</Typography>} */}
+        {registerError && <Typography color="error">{registerError}</Typography>}
+        {registerSuccess && <Typography>{registerSuccess}</Typography>}
       </div>
     </div>
   );

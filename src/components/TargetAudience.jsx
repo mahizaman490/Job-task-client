@@ -1,7 +1,8 @@
 // src/components/TargetAudience.js
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import { faCode, faBriefcase, faPiggyBank, faPalette, faGraduationCap, faLightbulb, faChartBar } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const TargetAudience = () => {
   const targetAudiences = [
